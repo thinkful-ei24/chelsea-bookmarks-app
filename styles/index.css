@@ -1,0 +1,109 @@
+/* general body styles */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+button,
+input[type='text'],
+textarea {
+  padding: 15px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+/* error message bar */
+.error-message {
+  width: 100%;
+}
+
+/* active star rating styles */
+.rating,
+.rated-stars {
+  display: inline-block;
+  position: relative;
+  height: 50px;
+  line-height: 50px;
+  font-size: 50px;
+}
+
+.rating label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+.rating label:last-child {
+  position: static;
+}
+
+.rating label:nth-child(1) {
+  z-index: 5;
+}
+
+.rating label:nth-child(2) {
+  z-index: 4;
+}
+
+.rating label:nth-child(3) {
+  z-index: 3;
+}
+
+.rating label:nth-child(4) {
+  z-index: 2;
+}
+
+.rating label:nth-child(5) {
+  z-index: 1;
+}
+
+.rating label input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+
+.rating label .icon {
+  float: left;
+  color: transparent;
+}
+
+.rating label:last-child .icon {
+  color: #ccc;
+}
+
+.rating:not(:hover) label input:checked ~ .icon,
+.rating:hover label:hover input ~ .icon {
+  color: #ecba14;
+}
+
+.rating label input:focus:not(:checked) ~ .icon:last-child {
+  color: #000;
+  text-shadow: 0 0 5px #ecba14;
+}
+
+/* rated stars styles */
+.rated-stars {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.rated-stars span {
+  position: relative;
+  color: #ccc;
+}
+
+.rated-stars span.checked {
+  color: #ecba14;
+}
