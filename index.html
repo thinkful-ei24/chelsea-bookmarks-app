@@ -7,85 +7,107 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Bookmarks App</title>
     <!--Fonts-->
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600" rel="stylesheet">
     <!--stylesheet-->
     <link rel="stylesheet" href="styles/index.css">
 </head>
 
 <body>
 
-    <head role="banner">
-        <div id="error-message js-error-message">
-            <p>Error messages should go here!</p>
-        </div>
-        <h1>My Bookmark List</h1>
-        <form id="js-add-bookmark-form">
-            <!--button to display form-->
-            <button type="button" name="bookmark-add-button">+ Add a bookmark</button>
-            <!--add item form-->
-            <div id="bookmark-form-wrapper">
-                <!--title-->
-                <label for="bookmark-title-entry">What is the title? *</label>
-                <input type="text" name="bookmark-title-entry" id="js-bookmark-title-entry" placeholder="The title goes here">
-                <!--rating-->
-                <div class="rating">
-                    <label>
-                        <input type="radio" name="stars" value="1" />
-                        <span class="icon">★</span>
-                    </label>
-                    <label>
-                        <input type="radio" name="stars" value="2" />
-                        <span class="icon">★</span>
-                        <span class="icon">★</span>
-                    </label>
-                    <label>
-                        <input type="radio" name="stars" value="3" />
-                        <span class="icon">★</span>
-                        <span class="icon">★</span>
-                        <span class="icon">★</span>
-                    </label>
-                    <label>
-                        <input type="radio" name="stars" value="4" />
-                        <span class="icon">★</span>
-                        <span class="icon">★</span>
-                        <span class="icon">★</span>
-                        <span class="icon">★</span>
-                    </label>
-                    <label>
-                        <input type="radio" name="stars" value="5" />
-                        <span class="icon">★</span>
-                        <span class="icon">★</span>
-                        <span class="icon">★</span>
-                        <span class="icon">★</span>
-                        <span class="icon">★</span>
-                    </label>
-                </div>
-                <!--desc-->
-                <label for="bookmark-description-entry">What is the description?</label>
-                <textarea name="bookmark-description-entry" id="js-bookmark-description-entry" placeholder="The description goes here"></textarea>
-                <!--url-->
-                <label for="bookmark-url-entry">What is the URL? *</label>
-                <input type="text" name="bookmark-url-entry" id="js-bookmark-url-entry" placeholder="http://example.com">
-
-                <!--required note *-->
-                <p>* required fields</p>
+    <header role="banner">
+        <!-- <div id="js-error-message" class="error-message row">
+            <div class="col-12">
+                <p>Error messages should go here!</p>
             </div>
-            <!--SUBMIT-->
-            <button type="submit">submit</button>
-        </form>
+        </div> -->
+        <div class="row">
+            <div class="col-6">
+                <h1>My Bookmark List</h1>
+            </div>
+            <div class="col-6">
+                <!--button to display form-->
+                <button type="button" name="bookmark-add-button" class="btn add-bookmark">+ Add a bookmark</button>
+            </div>
+        </div>
+        <!--Add bookmark form-->
+        <div class="row">
+            <div class="col-12">
+                <form id="js-add-bookmark-form" class="add-bookmark-form">
 
-    </head>
+                    <!--add item form-->
+                    <div id="bookmark-form-wrapper">
+                        <!--title-->
+                        <label for="bookmark-title-entry">What is the title? *</label>
+                        <input type="text" name="bookmark-title-entry" id="js-bookmark-title-entry" placeholder="The title goes here">
+                        <!--rating-->
+                        <label for="rating">How does it rate?</label>
+                        <div name="rating" class="rating">
+                            <label>
+                                <input type="radio" name="stars" value="1" />
+                                <span class="icon">★</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="stars" value="2" />
+                                <span class="icon">★</span>
+                                <span class="icon">★</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="stars" value="3" />
+                                <span class="icon">★</span>
+                                <span class="icon">★</span>
+                                <span class="icon">★</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="stars" value="4" />
+                                <span class="icon">★</span>
+                                <span class="icon">★</span>
+                                <span class="icon">★</span>
+                                <span class="icon">★</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="stars" value="5" />
+                                <span class="icon">★</span>
+                                <span class="icon">★</span>
+                                <span class="icon">★</span>
+                                <span class="icon">★</span>
+                                <span class="icon">★</span>
+                            </label>
+                        </div>
+                        <!--desc-->
+                        <label for="bookmark-description-entry">What is the description?</label>
+                        <textarea name="bookmark-description-entry" id="js-bookmark-description-entry" placeholder="The description goes here"></textarea>
+                        <!--url-->
+                        <label for="bookmark-url-entry">What is the URL? *</label>
+                        <input type="text" name="bookmark-url-entry" id="js-bookmark-url-entry" placeholder="http://example.com">
+
+                        <!--required note *-->
+                        <p>* required fields</p>
+                    </div>
+                    <!--SUBMIT-->
+                    <button type="submit" class="btn submit">submit</button>
+                </form>
+            </div>
+        </div>
+
+    </header>
     <main role="main">
-        <label for="filter">Filter by:</label>
-        <select name="filter" id="js-filter">
-            <option value="all">All</option>
-            <option value="1">more than 1 star</option>
-            <option value="2">more than 2 stars</option>
-            <option value="3">more than 3 stars</option>
-            <option value="4">more than 4 stars</option>
-        </select>
-        <ul>
-            <li id="0">
+        <div class="row">
+            <div class="col-12">
+                <div class="filter-bookmarks">
+                    <label for="filter">Filter by:</label>
+                    <select name="filter" id="js-filter">
+                        <option value="all">All</option>
+                        <option value="1">more than 1 star</option>
+                        <option value="2">more than 2 stars</option>
+                        <option value="3">more than 3 stars</option>
+                        <option value="4">more than 4 stars</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <ul class="row bookmarks-list">
+            <li id="i0" class="col-12">
                 <h2>Title of site</h2>
                 <div class="rated-stars">
                     <span class="icon checked">★</span>
@@ -103,7 +125,7 @@
                 </form>
                 <a href="http://example.com" class="btn">Visit site</a>
             </li>
-            <li id="1">
+            <li id="i1" class="col-12">
                 <h2>Google</h2>
                 <div class="rated-stars">
                     <span class="icon checked">★</span>
@@ -113,7 +135,7 @@
                     <span class="icon">★</span>
                 </div>
             </li>
-            <li id="2">
+            <li id="i2" class="col-12">
                 <h2>Facebook</h2>
                 <div class="rated-stars">
                     <span class="icon checked">★</span>
@@ -123,7 +145,7 @@
                     <span class="icon">★</span>
                 </div>
             </li>
-            <li id="3">
+            <li id="i3" class="col-12">
                 <h2>Fluffiest Cats in the World</h2>
                 <div class="rated-stars">
                     <span class="icon checked">★</span>

@@ -1,27 +1,167 @@
+/* Mobile first stylesheet
+all devices greater than 680px width
+defined with @media below
+*/
+
 /* general body styles */
 * {
   box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Montserrat', Helvetica, sans-serif;
 }
 
 button,
 input[type='text'],
-textarea {
-  padding: 15px;
+textarea,
+a {
+  padding: 10px 20px;
   border-radius: 6px;
   border: 1px solid #ccc;
+  text-decoration: none;
 }
 
 button:hover {
   cursor: pointer;
 }
 
+header {
+  background-color: #f1f1f1;
+}
+
+/* GRID styles
+
+960px wide w/ 12 gutters and half gutters on both edges
+
+12 - 60px columns 
+11 - 20px gutters
+2 - 10px gutters on edges 
+
+smaller screens get 20px padding on either side
+*/
+
+.row {
+  max-width: 1000px;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin: 0 auto;
+}
+
+/* Clearfix */
+.row::before,
+.row::after {
+  display: table;
+  content: '';
+}
+
+.row::after {
+  clear: both;
+}
+
+.col-3,
+.col-4,
+.col-6,
+.col-12 {
+  float: left;
+  padding-left: 1.04166666%;
+  padding-right: 1.04166666%;
+}
+
+/* Mobile defaults */
+.col-3,
+.col-4,
+.col-6,
+.col-12 {
+  width: 100%;
+}
+
+/*non-mobile styles on bottom*/
+
+/* header styles */
+h1 {
+  font-size: 1.75em;
+  text-align: center;
+  padding-top: 30px;
+}
+h2 {
+  font-size: 1.5em;
+}
+
+/* button styles */
+.btn {
+  background-color: #000;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 0.875em;
+  font-weight: 400;
+}
+
+/* form styles */
+
+.btn.add-bookmark {
+  width: 100%;
+  margin: 15px 0 30px 0;
+}
+
+#bookmark-form-wrapper {
+  background-color: #fff;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+}
+
+#bookmark-form-wrapper label {
+  margin: 5px 0;
+}
+
+#bookmark-form-wrapper .rating label {
+  margin: 0 0 20px 0;
+}
+
+#bookmark-form-wrapper p {
+  font-size: 0.625em;
+  font-style: italic;
+}
+
+#bookmark-form-wrapper input,
+#bookmark-form-wrapper textarea {
+  margin-bottom: 20px;
+}
+
+.add-bookmark-form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+}
+
+/* bookmarks listed */
+
+.filter-bookmarks select {
+  padding: 5px 10px;
+  background: #ccc;
+}
+
+ul.bookmarks-list {
+  list-style: none;
+}
+
 /* error message bar */
 .error-message {
   width: 100%;
+  background-color: red;
+}
+
+.error-message p {
+  color: #fff;
+  text-align: center;
+  padding: 13px 0;
+  font-size: 0.6875em;
+  font-weight: 400;
 }
 
 /* active star rating styles */
@@ -30,8 +170,8 @@ button:hover {
   display: inline-block;
   position: relative;
   height: 50px;
-  line-height: 50px;
-  font-size: 50px;
+  /* line-height: 50px; */
+  font-size: 1.875em;
 }
 
 .rating label {
@@ -106,4 +246,32 @@ button:hover {
 
 .rated-stars span.checked {
   color: #ecba14;
+}
+
+@media only screen and (min-width: 640px) {
+  /* Non-mobile, grid */
+  /* 3 columns, 3/12 in % */
+  .col-3 {
+    width: 25%;
+  }
+
+  /* 4 columns, 4/12 in % */
+  .col-4 {
+    width: 33.33%;
+  }
+
+  /* 6 columns 6/12 in % */
+  .col-6 {
+    width: 50%;
+  }
+
+  /* 12 columns, 12/12 */
+  .col-12 {
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width: 800px) {
+  /* do something to
+      override settings at previous threshold settings*/
 }
