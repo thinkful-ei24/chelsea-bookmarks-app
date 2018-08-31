@@ -65,7 +65,7 @@ const bookmarkList = (function() {
     }
     const extendedBookmarkElements = `
 		<li id="${bookmark.id}" class="expanded">
-			<button aria-label="close expanded ${bookmark.title} bookmark that has ${
+			<button aria-label="close ${bookmark.title} bookmark that has ${
       bookmark.rating
     } stars" class="bookmark-link js-bookmark-link">
 			<h2>${bookmark.title}</h2>
@@ -93,7 +93,7 @@ const bookmarkList = (function() {
 
     return `
     <li id="${bookmark.id}" class="">
-			<button aria-label="expand ${bookmark.title} bookmark that has ${
+			<button aria-label="${bookmark.title} bookmark that has ${
       bookmark.rating
     } stars" class="bookmark-link js-bookmark-link">
 			<h2>${bookmark.title}</h2>
