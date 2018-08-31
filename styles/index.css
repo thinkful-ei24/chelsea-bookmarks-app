@@ -3,7 +3,7 @@ all devices greater than 680px width
 defined with @media below
 */
 
-/* general body styles */
+/* general styles */
 * {
   box-sizing: border-box;
   padding: 0;
@@ -334,12 +334,15 @@ li.expanded a.btn {
     font-size: 2em;
     line-height: 1.5em;
   }
+
+  /*btn styles*/
   .btn.add-bookmark {
     width: auto;
     margin: 25px 0 0 0;
     float: right;
   }
 
+  /*star styles*/
   .rating,
   .rated-stars {
     height: 40px;
@@ -357,7 +360,5 @@ li.expanded a.btn {
   }
 }
 
-@media only screen and (min-width: 800px) {
-  /* do something to
-      override settings at previous threshold settings*/
-}
+/* @media only screen and (min-width: 800px) {
+} */

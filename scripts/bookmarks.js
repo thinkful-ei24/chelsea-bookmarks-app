@@ -1,14 +1,14 @@
 /* global $, API, STORE*/
 'use strict';
 
-//TODO: bookmarks function
+// bookmarkList function
 // All my functions that handle my bookmarks
 // - generate HTML function
 // - render my store state
 // - handle event listeners & error callbacks!
 // - bindEventListeners
 
-const bookmarks = (function() {
+const bookmarkList = (function() {
   // //FOR MY FORMS - JQuery library edit extends library to give me an object with
   $.fn.extend({
     serializeJson: function() {
@@ -34,6 +34,8 @@ const bookmarks = (function() {
   }
 
   //-----------------------------------------------------------------------------
+  //Generate HTML
+
   //generate HTML for bookmark elements
 
   function generateBookmarkElement(bookmark) {
@@ -102,7 +104,7 @@ const bookmarks = (function() {
     </li>`;
   }
 
-  //generate string of HTML
+  //generate string of HTML from bookmark elements array
   function generateBookmarkElementsString(bookmarks) {
     const bookmarksString = bookmarks.map(bookmark => {
       //console.log(bookmark);
@@ -115,6 +117,7 @@ const bookmarks = (function() {
   // generate HTML for add bookmark form
 
   function generateAddBookmarkForm() {
+    const star = `<span class="icon">★</span>`;
     return `
 		<!--add item form-->
 		<div id="bookmark-form-wrapper">
@@ -169,76 +172,62 @@ const bookmarks = (function() {
 		<button type="submit" class="btn submit">submit</button>
 		`;
   }
-  //-----------------------------------------------------------------------------
-  //render
-  function render() {
-    // console.log('My Render!');
-    let bookmarks = STORE.items;
 
-    //if error
+  //-----------------------------------------------------------------------------
+  //Render
+
+  function render() {
+    let currentSTORE = STORE.items;
+
+    //if error render error message on page & reset store to empty error message
     if (STORE.errorMessage) {
-      const mes = generateError(STORE.errorMessage);
-      $('#js-error-message').html(mes);
+      const err = generateError(STORE.errorMessage);
+      $('#js-error-message').html(err);
     } else {
       $('#js-error-message').html('');
     }
     STORE.setErrorMessage('');
 
-    //if form expanded
+    //if form expanded change button text & add form HTML
     if (STORE.formExpanded) {
       $('.js-add-bookmark').html('close form');
-      const addBookmarkFormExpanded = generateAddBookmarkForm();
-      $('#js-add-bookmark-form').html(addBookmarkFormExpanded);
+      $('#js-add-bookmark-form').html(generateAddBookmarkForm());
     } else {
       $('.js-add-bookmark').html('+ Add a Bookmark');
       $('#js-add-bookmark-form').html('');
     }
 
-    //if Filter By option selected render STORE items > than option selected
+    //if 'Filter By' option selected render STORE items > than option selected
     if (STORE.filterBy) {
-      bookmarks = STORE.items.filter(item => item.rating > STORE.filterBy);
+      currentSTORE = STORE.items.filter(item => item.rating > STORE.filterBy);
     }
 
-    // console.log(bookmarks);
-
-    const bookmarkElementsString = generateBookmarkElementsString(bookmarks);
-    // console.log(bookmarkElementsString);
-    // insert that HTML into the DOM
+    //run the generate HTML function on the current state of the STORE and render HTML
+    const bookmarkElementsString = generateBookmarkElementsString(currentSTORE);
     $('.js-bookmarks-list').html(bookmarkElementsString);
   }
 
   //-----------------------------------------------------------------------------
-  //handleSomeAction Event listeners
+  //handleSomeAction - Event listeners
 
-  //New Bookmark Submit ---------------------------------------------------
-
-  // function clearFieldsForBookmarkForm() {
-  //   $('#js-add-bookmark-form')
-  //     .find('input')
-  //     .val('');
-  //   $('#js-add-bookmark-form')
-  //     .find('textarea')
-  //     .val('');
-  // }
+  //'New Bookmark Submit' event listener ---------------------------------------------------
 
   function handleNewBookmarkSubmit() {
     $('#js-add-bookmark-form').submit(function(event) {
       event.preventDefault();
+
       //use my JQuery extended function from above to create an object w/ correct format
       const newBookmarkData = $(event.target).serializeJson();
-      // clearFieldsForBookmarkForm();
 
       //run create bookmark function
       API.createBookmark(
         newBookmarkData,
         newBookmark => {
           STORE.addBookmark(newBookmark);
-          // STORE.errorMessage = '';
           STORE.toggleFormExpanded();
           render();
         },
         error => {
-          console.log(error);
           STORE.setErrorMessage(error);
           render();
         }
@@ -246,7 +235,7 @@ const bookmarks = (function() {
     });
   }
 
-  //Expand bookmarks listener --------------------------------------------
+  //'Expand bookmarks' event listener --------------------------------------------
   function getBookmarkIdFromElement(item) {
     return $(item)
       .closest('li')
@@ -256,17 +245,17 @@ const bookmarks = (function() {
   function handleBookmarkExpand() {
     $('.bookmarks-list').on('click', '.js-bookmark-link', event => {
       const bookmarkId = getBookmarkIdFromElement(event.currentTarget);
-      //console.log(bookmarkId);
+
       STORE.expandBookmark(bookmarkId);
       render();
     });
   }
 
-  //Delete listener -----------------------------------------------------
+  //'Delete' event listener -----------------------------------------------------
   function handleBookmarkDelete() {
     $('.bookmarks-list').on('click', '.js-delete-bookmark', event => {
       const bookmarkId = getBookmarkIdFromElement(event.currentTarget);
-      // console.log(bookmarkId);
+
       API.deleteBookmark(bookmarkId, () => {
         STORE.findAndDelete(bookmarkId);
         render();
@@ -274,7 +263,7 @@ const bookmarks = (function() {
     });
   }
 
-  //Filter by listener -----------------------------------------------------
+  //'Filter by' event listener -----------------------------------------------------
 
   function handleFilterBy() {
     $('.js-bookmark-filter').on('change', function() {
@@ -285,11 +274,10 @@ const bookmarks = (function() {
     });
   }
 
-  //Add A Bookmark listener -----------------------------------------------------
+  //'Add A Bookmark' Button event listener -----------------------------------------------------
 
-  function handleAddABookmark() {
+  function handleAddABookmarkBtn() {
     $('.js-add-bookmark').on('click', () => {
-      // console.log('clicked');
       STORE.toggleFormExpanded();
       render();
     });
@@ -302,7 +290,7 @@ const bookmarks = (function() {
     handleBookmarkExpand();
     handleBookmarkDelete();
     handleFilterBy();
-    handleAddABookmark();
+    handleAddABookmarkBtn();
   }
 
   return {

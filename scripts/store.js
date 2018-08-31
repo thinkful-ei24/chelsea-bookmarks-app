@@ -1,6 +1,6 @@
 'use strict';
 
-//TODO: STORE function
+//STORE function
 // - functions needed to alter current state of store
 // - return store with defaults and called functions
 
@@ -10,7 +10,6 @@ const STORE = (function() {
   //error message
   const setErrorMessage = function(error) {
     this.errorMessage = error;
-    console.log(this.errorMessage);
   };
 
   //form expander

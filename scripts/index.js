@@ -1,15 +1,14 @@
-/* global $, bookmarks, API, STORE*/
-
+/* global $, bookmarkList, API, STORE*/
 'use strict';
 
 //DOM ready
 function main() {
-  bookmarks.bindEventListeners();
-  bookmarks.render();
+  bookmarkList.bindEventListeners();
+  bookmarkList.render();
 
   API.getBookmarks(items => {
     items.forEach(item => STORE.addBookmark(item));
-    bookmarks.render();
+    bookmarkList.render();
   });
 }
 $(main);

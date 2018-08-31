@@ -6,22 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Bookmarks App</title>
-    <!--Fonts-->
+    <!--fonts-->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600" rel="stylesheet">
     <!--stylesheet-->
     <link rel="stylesheet" href="styles/index.css">
 </head>
 
 <body>
-
     <header role="banner">
+        <!--error message generated with JS-->
         <div id="js-error-message" class="error-message row"></div>
+        <!--header and add bookmark button-->
         <div class="row">
             <div class="col-6">
                 <h1>My Bookmark List</h1>
             </div>
             <div class="col-6">
-                <!--button to display form-->
                 <button type="button" name="bookmark-add-button" class="btn add-bookmark js-add-bookmark"></button>
             </div>
         </div>
@@ -36,6 +36,7 @@
 
     </header>
     <main role="main">
+        <!--filter by select-->
         <div class="row">
             <div class="col-12">
                 <div class="filter-bookmarks">
@@ -50,6 +51,7 @@
                 </div>
             </div>
         </div>
+        <!--bookmark list items-->
         <div class="row">
             <div class="col-12">
                 <ul class="bookmarks-list js-bookmarks-list">
@@ -59,9 +61,9 @@
 
 
         </div>
-
-
     </main>
+
+    <!--JS-->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cuid/1.3.8/browser-cuid.min.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="scripts/store.js"></script>
