@@ -65,7 +65,7 @@ const bookmarks = (function() {
 		<li id="${bookmark.id}" class="expanded">
 			<a class="bookmark-link js-bookmark-link">
 			<h2>${bookmark.title}</h2>
-			<div class="rated-stars">${generateStars}</div>
+			<div class="rated-stars" value="${bookmark.rating}">${generateStars}</div>
 			</a>
 			<p>${bookmarkDesc}</p>
 		
@@ -89,7 +89,7 @@ const bookmarks = (function() {
     <li id="${bookmark.id}" class="">
 			<a class="bookmark-link js-bookmark-link">
 			<h2>${bookmark.title}</h2>
-			<div class="rated-stars">${generateStars}</div>
+			<div class="rated-stars" value="${bookmark.rating}">${generateStars}</div>
 			</a>
     </li>`;
   }
