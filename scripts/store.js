@@ -37,8 +37,13 @@ const STORE = (function() {
     this.items = this.items.filter(item => item.id !== id);
   };
 
-  // find and update bookmark
-  const findAndUpdate = function(id, newData) {};
+  //TODO: find and update bookmark
+  // const findAndUpdate = function(id, newData) {};
+
+  // filter by rating
+  const setFilterBy = function(rating) {
+    this.filterBy = rating;
+  };
 
   return {
     items: [],
@@ -51,7 +56,8 @@ const STORE = (function() {
     addBookmark,
     findById,
     findAndDelete,
-    findAndUpdate,
+    //  findAndUpdate,
+    setFilterBy,
     expandBookmark
   };
 })();

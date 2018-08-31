@@ -103,8 +103,10 @@ const bookmarks = (function() {
     // console.log('My Render!');
     let bookmarks = STORE.items;
 
-    //if statements needed to figure out state
-    // if(){}
+    //if Filter By option selected render STORE items > than option selected
+    if (STORE.filterBy) {
+      bookmarks = STORE.items.filter(item => item.rating > STORE.filterBy);
+    }
 
     // console.log(bookmarks);
 
@@ -168,11 +170,31 @@ const bookmarks = (function() {
     });
   }
 
+  //Filter by listener -----------------------------------------------------
+
+  // function getBookmarksByFilterResult() {
+  //   const filteredBookmarksArray = STORE.items.filter(item => {
+  //     return item.rating > STORE.filterBy;
+  //   });
+  //   STORE.items = filteredBookmarksArray;
+  // }
+
+  function handleFilterBy() {
+    $('.js-bookmark-filter').on('change', function() {
+      let selectedRating = $(this).val();
+
+      STORE.setFilterBy(selectedRating);
+      render();
+    });
+  }
+
+  //-----------------------------------------------------------------------------
   //Bind Event Listeners
   function bindEventListeners() {
     handleNewBookmarkSubmit();
     handleBookmarkExpand();
     handleBookmarkDelete();
+    handleFilterBy();
   }
 
   return {
