@@ -22,65 +22,14 @@
             </div>
             <div class="col-6">
                 <!--button to display form-->
-                <button type="button" name="bookmark-add-button" class="btn add-bookmark">+ Add a bookmark</button>
+                <button type="button" name="bookmark-add-button" class="btn add-bookmark js-add-bookmark"></button>
             </div>
         </div>
         <!--Add bookmark form-->
         <div class="row">
             <div class="col-12">
                 <form id="js-add-bookmark-form" class="add-bookmark-form">
-
-                    <!--add item form-->
-                    <div id="bookmark-form-wrapper">
-                        <!--title-->
-                        <label for="bookmark-title-entry">What is the title? *</label>
-                        <input type="text" name="title" id="bookmark-title-entry" placeholder="The title goes here">
-                        <!--rating-->
-                        <label for="bookmark-rating">How does it rate?</label>
-                        <div name="rating" id="bookmark-rating" class="rating">
-                            <label>
-                                <input type="radio" name="rating" value="1" />
-                                <span class="icon">★</span>
-                            </label>
-                            <label>
-                                <input type="radio" name="rating" value="2" />
-                                <span class="icon">★</span>
-                                <span class="icon">★</span>
-                            </label>
-                            <label>
-                                <input type="radio" name="rating" value="3" />
-                                <span class="icon">★</span>
-                                <span class="icon">★</span>
-                                <span class="icon">★</span>
-                            </label>
-                            <label>
-                                <input type="radio" name="rating" value="4" />
-                                <span class="icon">★</span>
-                                <span class="icon">★</span>
-                                <span class="icon">★</span>
-                                <span class="icon">★</span>
-                            </label>
-                            <label>
-                                <input type="radio" name="rating" value="5" />
-                                <span class="icon">★</span>
-                                <span class="icon">★</span>
-                                <span class="icon">★</span>
-                                <span class="icon">★</span>
-                                <span class="icon">★</span>
-                            </label>
-                        </div>
-                        <!--desc-->
-                        <label for="bookmark-description-entry">What is the description?</label>
-                        <textarea name="desc" id="bookmark-description-entry" placeholder="The description goes here"></textarea>
-                        <!--url-->
-                        <label for="bookmark-url-entry">What is the URL? *</label>
-                        <input type="text" name="url" id="bookmark-url-entry" placeholder="http://example.com">
-
-                        <!--required note *-->
-                        <p>* required fields</p>
-                    </div>
-                    <!--SUBMIT-->
-                    <button type="submit" class="btn submit">submit</button>
+                    <!--JS generated form-->
                 </form>
             </div>
         </div>
@@ -104,58 +53,7 @@
         <div class="row">
             <div class="col-12">
                 <ul class="bookmarks-list js-bookmarks-list">
-                    <!-- <li id="i0" class="expanded">
-
-                        <h2>Title of site</h2>
-                        <div class="rated-stars">
-                            <span class="icon checked">★</span>
-                            <span class="icon checked">★</span>
-                            <span class="icon">★</span>
-                            <span class="icon">★</span>
-                            <span class="icon">★</span>
-                        </div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vel purus vitae tortor aliquam ultricies
-                            vel id ipsum. Mauris lobortis dapibus libero ut molestie. Suspendisse vel erat erat. Cras vitae
-                            dapibus mauris, sit amet accumsan neque. </p>
-                        <form class="js-edit-bookmarked-item-form">
-                            <button>delete</button>
-                            <button>edit</button>
-                        </form>
-                        <a href="http://example.com" class="btn">Visit site</a>
-
-                    </li>
-                    <li id="i1" class="">
-
-                        <h2>Google</h2>
-                        <div class="rated-stars">
-                            <span class="icon checked">★</span>
-                            <span class="icon checked">★</span>
-                            <span class="icon checked">★</span>
-                            <span class="icon">★</span>
-                            <span class="icon">★</span>
-                        </div>
-
-                    </li>
-                    <li id="i2" class="">
-                        <h2>Facebook</h2>
-                        <div class="rated-stars">
-                            <span class="icon checked">★</span>
-                            <span class="icon">★</span>
-                            <span class="icon">★</span>
-                            <span class="icon">★</span>
-                            <span class="icon">★</span>
-                        </div>
-                    </li>
-                    <li id="i3" class="">
-                        <h2>Fluffiest Cats in the World</h2>
-                        <div class="rated-stars">
-                            <span class="icon checked">★</span>
-                            <span class="icon checked">★</span>
-                            <span class="icon checked">★</span>
-                            <span class="icon checked">★</span>
-                            <span class="icon checked">★</span>
-                        </div>
-                    </li> -->
+                    <!--JS generated li items-->
                 </ul>
             </div>
 

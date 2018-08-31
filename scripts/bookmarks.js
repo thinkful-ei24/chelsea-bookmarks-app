@@ -104,6 +104,63 @@ const bookmarks = (function() {
     return bookmarksString.join('');
   }
 
+  // generate HTML for add bookmark form
+
+  function generateAddBookmarkForm() {
+    return `
+		<!--add item form-->
+		<div id="bookmark-form-wrapper">
+				<!--title-->
+				<label for="bookmark-title-entry">What is the title? *</label>
+				<input type="text" name="title" id="bookmark-title-entry" placeholder="The title goes here">
+				<!--rating-->
+				<label for="bookmark-rating">How does it rate?</label>
+				<div name="rating" id="bookmark-rating" class="rating">
+						<label>
+								<input type="radio" name="rating" value="1" />
+								<span class="icon">★</span>
+						</label>
+						<label>
+								<input type="radio" name="rating" value="2" />
+								<span class="icon">★</span>
+								<span class="icon">★</span>
+						</label>
+						<label>
+								<input type="radio" name="rating" value="3" />
+								<span class="icon">★</span>
+								<span class="icon">★</span>
+								<span class="icon">★</span>
+						</label>
+						<label>
+								<input type="radio" name="rating" value="4" />
+								<span class="icon">★</span>
+								<span class="icon">★</span>
+								<span class="icon">★</span>
+								<span class="icon">★</span>
+						</label>
+						<label>
+								<input type="radio" name="rating" value="5" />
+								<span class="icon">★</span>
+								<span class="icon">★</span>
+								<span class="icon">★</span>
+								<span class="icon">★</span>
+								<span class="icon">★</span>
+						</label>
+				</div>
+				<!--desc-->
+				<label for="bookmark-description-entry">What is the description?</label>
+				<textarea name="desc" id="bookmark-description-entry" placeholder="The description goes here"></textarea>
+				<!--url-->
+				<label for="bookmark-url-entry">What is the URL? *</label>
+				<input type="text" name="url" id="bookmark-url-entry" placeholder="http://example.com">
+
+				<!--required note *-->
+				<p>* required fields</p>
+		</div>
+		<!--SUBMIT-->
+		<button type="submit" class="btn submit">submit</button>
+		`;
+  }
   //-----------------------------------------------------------------------------
   //render
   function render() {
@@ -115,8 +172,20 @@ const bookmarks = (function() {
       const mes = generateError(STORE.errorMessage);
       $('#js-error-message').html(mes);
     } else {
-      $('#js-error-message').empty();
+      $('#js-error-message').html('');
     }
+    STORE.setErrorMessage('');
+
+    //if form expanded
+    if (STORE.formExpanded) {
+      $('.js-add-bookmark').html('close form');
+      const addBookmarkFormExpanded = generateAddBookmarkForm();
+      $('#js-add-bookmark-form').html(addBookmarkFormExpanded);
+    } else {
+      $('.js-add-bookmark').html('+ Add a Bookmark');
+      $('#js-add-bookmark-form').html('');
+    }
+
     //if Filter By option selected render STORE items > than option selected
     if (STORE.filterBy) {
       bookmarks = STORE.items.filter(item => item.rating > STORE.filterBy);
@@ -135,28 +204,29 @@ const bookmarks = (function() {
 
   //New Bookmark Submit ---------------------------------------------------
 
-  function clearFieldsForBookmarkForm() {
-    $('#js-add-bookmark-form')
-      .find('input')
-      .val('');
-    $('#js-add-bookmark-form')
-      .find('textarea')
-      .val('');
-  }
+  // function clearFieldsForBookmarkForm() {
+  //   $('#js-add-bookmark-form')
+  //     .find('input')
+  //     .val('');
+  //   $('#js-add-bookmark-form')
+  //     .find('textarea')
+  //     .val('');
+  // }
 
   function handleNewBookmarkSubmit() {
     $('#js-add-bookmark-form').submit(function(event) {
       event.preventDefault();
       //use my JQuery extended function from above to create an object w/ correct format
       const newBookmarkData = $(event.target).serializeJson();
-      clearFieldsForBookmarkForm();
+      // clearFieldsForBookmarkForm();
 
       //run create bookmark function
       API.createBookmark(
         newBookmarkData,
         newBookmark => {
-          STORE.errorMessage = null;
           STORE.addBookmark(newBookmark);
+          // STORE.errorMessage = '';
+          STORE.toggleFormExpanded();
           render();
         },
         error => {
@@ -198,18 +268,21 @@ const bookmarks = (function() {
 
   //Filter by listener -----------------------------------------------------
 
-  // function getBookmarksByFilterResult() {
-  //   const filteredBookmarksArray = STORE.items.filter(item => {
-  //     return item.rating > STORE.filterBy;
-  //   });
-  //   STORE.items = filteredBookmarksArray;
-  // }
-
   function handleFilterBy() {
     $('.js-bookmark-filter').on('change', function() {
       let selectedRating = $(this).val();
 
       STORE.setFilterBy(selectedRating);
+      render();
+    });
+  }
+
+  //Add A Bookmark listener -----------------------------------------------------
+
+  function handleAddABookmark() {
+    $('.js-add-bookmark').on('click', () => {
+      // console.log('clicked');
+      STORE.toggleFormExpanded();
       render();
     });
   }
@@ -221,6 +294,7 @@ const bookmarks = (function() {
     handleBookmarkExpand();
     handleBookmarkDelete();
     handleFilterBy();
+    handleAddABookmark();
   }
 
   return {
