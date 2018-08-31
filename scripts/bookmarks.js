@@ -19,12 +19,19 @@ const bookmarks = (function() {
     }
   });
 
-  // use this event listner to save the value later
-  //   function ratingStars() {
-  //     $(':radio').change(function() {
-  //       console.log('New star rating: ' + this.value);
-  //     });
-  //   }
+  // create error messsage
+  function generateError(error) {
+    let message = '';
+    if (error.responseJSON && error.responseJSON.message) {
+      message = error.responseJSON.message;
+    } else {
+      message = `${error.code} Server Error`;
+    }
+    return `  
+		<div class="col-12">
+    	<p>${message}</p>
+  	</div>`;
+  }
 
   //-----------------------------------------------------------------------------
   //generate HTML for bookmark elements
@@ -103,6 +110,13 @@ const bookmarks = (function() {
     // console.log('My Render!');
     let bookmarks = STORE.items;
 
+    //if error
+    if (STORE.errorMessage) {
+      const mes = generateError(STORE.errorMessage);
+      $('#js-error-message').html(mes);
+    } else {
+      $('#js-error-message').empty();
+    }
     //if Filter By option selected render STORE items > than option selected
     if (STORE.filterBy) {
       bookmarks = STORE.items.filter(item => item.rating > STORE.filterBy);
@@ -120,16 +134,28 @@ const bookmarks = (function() {
   //handleSomeAction Event listeners
 
   //New Bookmark Submit ---------------------------------------------------
+
+  function clearFieldsForBookmarkForm() {
+    $('#js-add-bookmark-form')
+      .find('input')
+      .val('');
+    $('#js-add-bookmark-form')
+      .find('textarea')
+      .val('');
+  }
+
   function handleNewBookmarkSubmit() {
     $('#js-add-bookmark-form').submit(function(event) {
       event.preventDefault();
       //use my JQuery extended function from above to create an object w/ correct format
       const newBookmarkData = $(event.target).serializeJson();
+      clearFieldsForBookmarkForm();
 
       //run create bookmark function
       API.createBookmark(
         newBookmarkData,
         newBookmark => {
+          STORE.errorMessage = null;
           STORE.addBookmark(newBookmark);
           render();
         },

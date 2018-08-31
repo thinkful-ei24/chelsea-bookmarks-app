@@ -9,7 +9,6 @@ const API = (function() {
 
   //CREATE
   const createBookmark = function(newBookmarkData, onSuccess, onError) {
-    // const newBookmark = JSON.stringify({ newBookmarkData });
     $.ajax({
       url: BASE_URL + '/bookmarks',
       method: 'POST',

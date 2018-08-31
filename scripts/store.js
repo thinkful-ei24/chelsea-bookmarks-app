@@ -8,7 +8,10 @@ const STORE = (function() {
   //functions on my STORE
 
   //error message
-  const setErrorMessage = function(error) {};
+  const setErrorMessage = function(error) {
+    this.errorMessage = error;
+    console.log(this.errorMessage);
+  };
 
   //form expander
   const toggleFormExpanded = function() {
@@ -47,7 +50,7 @@ const STORE = (function() {
 
   return {
     items: [],
-    errorMessage: '',
+    errorMessage: null,
     formExpanded: false,
     filterBy: 0,
 
