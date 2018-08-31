@@ -24,7 +24,8 @@ a {
   text-decoration: none;
 }
 
-button:hover {
+button:hover,
+a:hover {
   cursor: pointer;
 }
 
@@ -149,17 +150,28 @@ h2 {
 
 ul.bookmarks-list {
   list-style: none;
+  display: flex;
+  flex-direction: column-reverse;
 }
 
 ul.bookmarks-list li {
   width: 100%;
   margin: 30px 0;
+}
+
+ul.bookmarks-list li.expanded {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+ul.bookmarks-list a {
   display: flex;
   justify-content: space-between;
 }
 
-ul.bookmarks-list li.expanded {
-  display: block;
+ul.bookmarks-list li.expanded a.bookmark-link {
+  border: none;
 }
 
 /* error message bar */

@@ -33,7 +33,9 @@ const STORE = (function() {
   };
 
   // find and delete bookmark
-  const findAndDelete = function(id) {};
+  const findAndDelete = function(id) {
+    this.items = this.items.filter(item => item.id !== id);
+  };
 
   // find and update bookmark
   const findAndUpdate = function(id, newData) {};

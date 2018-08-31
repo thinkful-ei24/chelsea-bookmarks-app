@@ -5,7 +5,7 @@
 // All my functions that handle my bookmarks
 // - generate HTML function
 // - render my store state
-// - handle event listenerserror callbacks!
+// - handle event listeners & error callbacks!
 // - bindEventListeners
 
 const bookmarks = (function() {
@@ -26,7 +26,9 @@ const bookmarks = (function() {
   //     });
   //   }
 
-  //generate bookmark elements
+  //-----------------------------------------------------------------------------
+  //generate HTML for bookmark elements
+
   function generateBookmarkElement(bookmark) {
     //apply correct star rating
     const emptyStar = `<span class="icon">★</span>`;
@@ -48,30 +50,40 @@ const bookmarks = (function() {
     }
 
     // const holding html
-    const nameThis = `<li id="${bookmark.id}" class="expanded">
+    let bookmarkDesc = '';
+    if (bookmark.desc) {
+      bookmarkDesc = bookmark.desc;
+    }
+    const extendedBookmarkElements = `
+		<li id="${bookmark.id}" class="expanded">
+			<a class="bookmark-link js-bookmark-link">
+			<h2>${bookmark.title}</h2>
+			<div class="rated-stars">${generateStars}</div>
+			</a>
+			<p>${bookmarkDesc}</p>
+		
+				<a class="js-delete-bookmark">delete</a>
+				<a class="js-edit-bookmark">edit</a>
 
-		<h2>${bookmark.title}</h2>
-    <div class="rated-stars">${generateStars}</div>
-		<p>${bookmark.desc}</p>
-		<form class="js-edit-bookmarked-item-form">
-				<button>delete</button>
-				<button>edit</button>
-		</form>
-		<a href="http://example.com" class="btn">Visit site</a>
+			<a href="${bookmark.url}" target="blank" class="btn">Visit site</a>
 
 </li>`;
 
     //if expanded state expand!
-    // if(){
-
-    // }
+    if (bookmark.expanded) {
+      return `
+			${extendedBookmarkElements}
+			`;
+    }
 
     //return my html
 
     return `
     <li id="${bookmark.id}" class="">
-    <h2>${bookmark.title}</h2>
-    <div class="rated-stars">${generateStars}</div>
+			<a class="bookmark-link js-bookmark-link">
+			<h2>${bookmark.title}</h2>
+			<div class="rated-stars">${generateStars}</div>
+			</a>
     </li>`;
   }
 
@@ -85,6 +97,7 @@ const bookmarks = (function() {
     return bookmarksString.join('');
   }
 
+  //-----------------------------------------------------------------------------
   //render
   function render() {
     // console.log('My Render!');
@@ -101,9 +114,10 @@ const bookmarks = (function() {
     $('.js-bookmarks-list').html(bookmarkElementsString);
   }
 
+  //-----------------------------------------------------------------------------
   //handleSomeAction Event listeners
 
-  //New Bookmark Submit
+  //New Bookmark Submit ---------------------------------------------------
   function handleNewBookmarkSubmit() {
     $('#js-add-bookmark-form').submit(function(event) {
       event.preventDefault();
@@ -126,23 +140,39 @@ const bookmarks = (function() {
     });
   }
 
-  //Expand bookmarks listener
+  //Expand bookmarks listener --------------------------------------------
   function getBookmarkIdFromElement(item) {
-    return $(item).attr('id');
+    return $(item)
+      .closest('li')
+      .attr('id');
   }
 
   function handleBookmarkExpand() {
-    $('.bookmarks-list').on('click', 'li', event => {
+    $('.bookmarks-list').on('click', '.js-bookmark-link', event => {
       const bookmarkId = getBookmarkIdFromElement(event.currentTarget);
       //console.log(bookmarkId);
       STORE.expandBookmark(bookmarkId);
+      render();
     });
   }
 
+  //Delete listener -----------------------------------------------------
+  function handleBookmarkDelete() {
+    $('.bookmarks-list').on('click', '.js-delete-bookmark', event => {
+      const bookmarkId = getBookmarkIdFromElement(event.currentTarget);
+      // console.log(bookmarkId);
+      API.deleteBookmark(bookmarkId, () => {
+        STORE.findAndDelete(bookmarkId);
+        render();
+      });
+    });
+  }
+
+  //Bind Event Listeners
   function bindEventListeners() {
-    //call all functions above here
     handleNewBookmarkSubmit();
     handleBookmarkExpand();
+    handleBookmarkDelete();
   }
 
   return {
