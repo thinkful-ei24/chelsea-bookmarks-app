@@ -1,26 +1,27 @@
-/* global $, bookmarks*/
+/* global $, bookmarks, API, STORE*/
 
 'use strict';
 
 //DOM ready
 function main() {
-  bookmarks.ratingStars();
   bookmarks.bindEventListeners();
+  bookmarks.render();
+
+  API.getBookmarks(items => {
+    items.forEach(item => STORE.addBookmark(item));
+    bookmarks.render();
+  });
+
+  // Create Bookmark Test
+  //   API.createBookmark(
+  //     'This is a Title',
+  //     'http://www.linkiscool.com',
+  //     function() {
+  //       console.log('success');
+  //     },
+  //     function() {
+  //       console.log('fail');
+  //     }
+  //   );
 }
-
 $(main);
-
-// //FOR MY FORMS - JQuery library edit extends library to give me an object with
-// $.fn.extend({
-//   serializeJson: function() {
-//     const formData = new FormData(this[0]);
-//     const obj = {};
-//     formData.forEach((val, name) => (obj[name] = val)); //FormData only has .forEach available to it
-//     return JSON.stringify(obj);
-//   }
-// });
-
-// $('#form').submit(e => {
-//   e.preventDefalut();
-//   console.log($(e.target).serializeJson()); // call my new JQuery function on this form when submitted
-// });

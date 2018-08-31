@@ -15,11 +15,11 @@
 <body>
 
     <header role="banner">
-        <!-- <div id="js-error-message" class="error-message row">
+        <div id="js-error-message" class="error-message row">
             <div class="col-12">
                 <p>Error messages should go here!</p>
             </div>
-        </div> -->
+        </div>
         <div class="row">
             <div class="col-6">
                 <h1>My Bookmark List</h1>
@@ -43,29 +43,29 @@
                         <label for="bookmark-rating">How does it rate?</label>
                         <div name="rating" id="bookmark-rating" class="rating">
                             <label>
-                                <input type="radio" name="stars" value="1" />
+                                <input type="radio" name="rating" value="1" />
                                 <span class="icon">★</span>
                             </label>
                             <label>
-                                <input type="radio" name="stars" value="2" />
-                                <span class="icon">★</span>
-                                <span class="icon">★</span>
-                            </label>
-                            <label>
-                                <input type="radio" name="stars" value="3" />
-                                <span class="icon">★</span>
+                                <input type="radio" name="rating" value="2" />
                                 <span class="icon">★</span>
                                 <span class="icon">★</span>
                             </label>
                             <label>
-                                <input type="radio" name="stars" value="4" />
-                                <span class="icon">★</span>
+                                <input type="radio" name="rating" value="3" />
                                 <span class="icon">★</span>
                                 <span class="icon">★</span>
                                 <span class="icon">★</span>
                             </label>
                             <label>
-                                <input type="radio" name="stars" value="5" />
+                                <input type="radio" name="rating" value="4" />
+                                <span class="icon">★</span>
+                                <span class="icon">★</span>
+                                <span class="icon">★</span>
+                                <span class="icon">★</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="rating" value="5" />
                                 <span class="icon">★</span>
                                 <span class="icon">★</span>
                                 <span class="icon">★</span>
@@ -75,7 +75,7 @@
                         </div>
                         <!--desc-->
                         <label for="bookmark-description-entry">What is the description?</label>
-                        <textarea name="description" id="bookmark-description-entry" placeholder="The description goes here"></textarea>
+                        <textarea name="desc" id="bookmark-description-entry" placeholder="The description goes here"></textarea>
                         <!--url-->
                         <label for="bookmark-url-entry">What is the URL? *</label>
                         <input type="text" name="url" id="bookmark-url-entry" placeholder="http://example.com">
@@ -107,8 +107,8 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <ul class="bookmarks-list">
-                    <li id="i0" class="expanded">
+                <ul class="bookmarks-list js-bookmarks-list">
+                    <!-- <li id="i0" class="expanded">
 
                         <h2>Title of site</h2>
                         <div class="rated-stars">
@@ -159,7 +159,7 @@
                             <span class="icon checked">★</span>
                             <span class="icon checked">★</span>
                         </div>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
 
