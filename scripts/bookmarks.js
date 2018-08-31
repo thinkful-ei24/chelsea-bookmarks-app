@@ -63,16 +63,20 @@ const bookmarks = (function() {
     }
     const extendedBookmarkElements = `
 		<li id="${bookmark.id}" class="expanded">
-			<a class="bookmark-link js-bookmark-link">
+			<button aria-label="close expanded ${bookmark.title} bookmark that has ${
+      bookmark.rating
+    } stars" class="bookmark-link js-bookmark-link">
 			<h2>${bookmark.title}</h2>
-			<div class="rated-stars" value="${bookmark.rating}">${generateStars}</div>
-			</a>
-			<p>${bookmarkDesc}</p>
+			<div class="rated-stars">${generateStars}</div>
+			</button>
+			<p aria-label="description of bookmark" class="description">${bookmarkDesc}</p>
 		
-				<a class="js-delete-bookmark">delete</a>
-				<a class="js-edit-bookmark">edit</a>
+				<button aria-label="delete bookmark" class="delete-bookmark js-delete-bookmark">delete</button>
+			<!--	<button aria-label="edit bookmark" class="edit-bookmark js-edit-bookmark">edit</button> -->
 
-			<a href="${bookmark.url}" target="blank" class="btn">Visit site</a>
+			<a href="${bookmark.url}" target="blank" class="btn" aria-label="Visit ${
+      bookmark.title
+    } URL">Visit site</a>
 
 </li>`;
 
@@ -87,10 +91,14 @@ const bookmarks = (function() {
 
     return `
     <li id="${bookmark.id}" class="">
-			<a class="bookmark-link js-bookmark-link">
+			<button aria-label="expand ${bookmark.title} bookmark that has ${
+      bookmark.rating
+    } stars" class="bookmark-link js-bookmark-link">
 			<h2>${bookmark.title}</h2>
-			<div class="rated-stars" value="${bookmark.rating}">${generateStars}</div>
-			</a>
+			<div class="rated-stars" aria-label="${
+        bookmark.rating
+      } stars">${generateStars}</div>
+			</button>
     </li>`;
   }
 
@@ -115,7 +123,7 @@ const bookmarks = (function() {
 				<input type="text" name="title" id="bookmark-title-entry" placeholder="The title goes here">
 				<!--rating-->
 				<label for="bookmark-rating">How does it rate?</label>
-				<div name="rating" id="bookmark-rating" class="rating">
+				<div name="rating" id="bookmark-rating" class="rating form-rating">
 						<label>
 								<input type="radio" name="rating" value="1" />
 								<span class="icon">★</span>

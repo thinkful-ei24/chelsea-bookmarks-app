@@ -8,9 +8,6 @@ defined with @media below
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-}
-
-body {
   font-family: 'Montserrat', Helvetica, sans-serif;
 }
 
@@ -89,7 +86,8 @@ h1 {
 }
 h2 {
   font-size: 1.5em;
-  line-height: 2em;
+  line-height: 1.5em;
+  padding: 5px 0;
 }
 
 /* button styles */
@@ -156,26 +154,40 @@ ul.bookmarks-list {
 
 ul.bookmarks-list li {
   width: 100%;
-  margin: 30px 0;
+  margin: 10px 0;
 }
 
 ul.bookmarks-list li.expanded {
   background-color: #fff;
   border: 1px solid #ccc;
   border-radius: 6px;
+  padding: 10px;
 }
 
-ul.bookmarks-list a {
+ul.bookmarks-list button.bookmark-link {
   display: flex;
   justify-content: space-between;
+  width: 100%;
+  text-align: left;
+  background-color: #fff;
+  padding: 10px;
 }
 
-ul.bookmarks-list li.expanded a.bookmark-link {
+ul.bookmarks-list li.expanded button.bookmark-link {
   border: none;
+  padding: 0;
 }
 
-.bookmark-link:focus {
-  border: 2px solid #fff;
+p.description {
+  margin-bottom: 10px;
+  line-height: 1.5em;
+  overflow: auto;
+  padding: 20px 0;
+}
+
+li.expanded a.btn {
+  float: right;
+  display: block;
 }
 
 /* error message bar */
@@ -197,8 +209,8 @@ ul.bookmarks-list li.expanded a.bookmark-link {
 .rated-stars {
   display: inline-block;
   position: relative;
-  height: 50px;
-  /* line-height: 50px; */
+  height: 30px;
+  line-height: 30px;
   font-size: 1.875em;
 }
 
@@ -261,6 +273,10 @@ ul.bookmarks-list li.expanded a.bookmark-link {
   text-shadow: 0 0 5px #ecba14;
 }
 
+.form-rating {
+  margin-bottom: 20px;
+}
+
 /* rated stars styles */
 .rated-stars {
   display: flex;
@@ -274,6 +290,18 @@ ul.bookmarks-list li.expanded a.bookmark-link {
 
 .rated-stars span.checked {
   color: #ecba14;
+}
+
+/*Filter bookmarks styles*/
+.filter-bookmarks {
+  margin: 25px 0 20px 0;
+  display: block;
+  float: right;
+}
+
+.filter-bookmarks select {
+  height: 35px;
+  margin-left: 10px;
 }
 
 @media only screen and (min-width: 640px) {
@@ -299,9 +327,33 @@ ul.bookmarks-list li.expanded a.bookmark-link {
   }
 
   /*header styles*/
-
+  h1 {
+    text-align: left;
+  }
+  h2 {
+    font-size: 2em;
+    line-height: 1.5em;
+  }
   .btn.add-bookmark {
     width: auto;
+    margin: 25px 0 0 0;
+    float: right;
+  }
+
+  .rating,
+  .rated-stars {
+    height: 40px;
+    line-height: 40px;
+    font-size: 2.5em;
+  }
+
+  /*form*/
+  .add-bookmark-form {
+    margin-top: 30px;
+  }
+  .add-bookmark-form button.btn.submit {
+    width: auto;
+    align-self: flex-end;
   }
 }
 
